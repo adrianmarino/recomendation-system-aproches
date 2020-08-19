@@ -1,0 +1,8 @@
+**/__pycache__/
+.idea/
+cv2
+glob
+**/.ipynb_checkpoints/
+
+logs/
+temp/

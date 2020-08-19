@@ -1,0 +1,19 @@
+name: recommendations
+channels:
+- anaconda
+- conda-forge
+- defaults
+dependencies:
+    - python>=3.6
+    - numpy
+    - pyyaml
+    - tensorflow-gpu
+    - matplotlib
+    - pandas
+    - jupyterlab
+    - scikit-learn
+    - plotly
+    - nltk
+    - pip
+    - pip:
+        - gensim
