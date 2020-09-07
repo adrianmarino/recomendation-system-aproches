@@ -4,16 +4,16 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-    - python>=3.6
+    - python>=3.7
     - numpy
-    - pyyaml
-    - tensorflow-gpu
     - matplotlib
     - pandas
     - jupyterlab
     - scikit-learn
     - plotly
-    - nltk
+    - hurry.filesize
+    - pydot
+    - jupyterlab
     - pip
     - pip:
-        - gensim
+        - tensorflow

@@ -22,7 +22,8 @@ class MetricsPlotter(Callback):
                  validation_data=None,
                  plot_interval=10,
                  evaluate_interval=50,
-                 batch_size=32
+                 batch_size=32,
+                 val_batch_size=None
                  ):
         super().__init__()
         self.__plot_interval = plot_interval
@@ -33,8 +34,9 @@ class MetricsPlotter(Callback):
 
         self.validation_generator = validation_generator
         self.validation_data = validation_data
-        self.batch_size = batch_size
+        self.batch_size = int(batch_size)
         self.metrics_names = metrics_names
+        self.val_batch_size = int(val_batch_size) if val_batch_size else self.batch_size
         self.__reset()
 
     def __reset(self):
@@ -98,7 +100,7 @@ class MetricsPlotter(Callback):
             score = self.model.evaluate(
                 val_features,
                 val_labels,
-                batch_size=self.batch_size,
+                batch_size=self.val_batch_size,
                 verbose=1
             )
             return np.array(score).flatten()
