@@ -1,46 +1,55 @@
-from pandas import np
+import pandas as pd
 
+from model.model import Model
 from model.recommender.simmilarity_model import SimilarityModel
+from model.recommender.value_index_mapper import ValueIndexMapper
 
 
 def revert(array): return array[::-1]
 
 
 class Recommender:
-    def __init__(self, model):
-        self.model = model
 
-        movie_embeddings_layer = model.layers[3]
-        self.movie_embeddings_matrix = movie_embeddings_layer.get_weights()[0]
+    def __init__(self, model, dataset):
+        self.model = Model(model)
+        self.dataset = dataset
+        self.user_converter = ValueIndexMapper(dataset.ratings(), value_col='userId', index_col='user')
+        self.movie_converter = ValueIndexMapper(dataset.ratings(), value_col='movieId', index_col='movie')
 
-        user_embeddings_layer = model.layers[2]
-        self.user_embeddings_matrix = user_embeddings_layer.get_weights()[0]
+    def users_similar_to(self, user_id, limit=10):
+        user_idx = self.user_converter.to_index(user_id)
 
-    def users_similar_to(self, user_idx, count=10):
         similarity_model = SimilarityModel(
-            self.user_embeddings_matrix,
-            neighbors_count=count
+            self.model.user_embeddings_matrix,
+            neighbors_count=limit
         )
-        return similarity_model.similar(user_idx)
+        similar_indexes = similarity_model.similar(user_idx)
 
-    def movies_similar_to(self, movie_idx, count=10):
+        return self.user_converter.to_values(similar_indexes)
+
+    def movies_similar_to(self, movie_id, limit=10):
+        movie_idx = self.movie_converter.to_index(movie_id)
+
         similarity_model = SimilarityModel(
-            self.movie_embeddings_matrix,
-            neighbors_count=count
+            self.model.movie_embeddings_matrix,
+            neighbors_count=limit
         )
-        return similarity_model.similar(movie_idx)
+        similar_indexes = similarity_model.similar(movie_idx)
+        similar_ids = self.movie_converter.to_values(similar_indexes)
 
-    def recommended_movies_for(self, user_idx):
-        x = self.__to_user_movie_input(user_idx, len(self.movie_embeddings_matrix))
+        return self.dataset.movies_by_ids(similar_ids)
 
-        user_ratings = self.model.predict_on_batch(x)
-        user_ratings = user_ratings.reshape((1, -1))[0]
+    def top_movies_by_user_id(self, user_id, limit=10):
+        user_idx = self.user_converter.to_index(user_id)
 
-        movie_idxs_orderred_by_ratings_desc = revert(np.argsort(user_ratings))
+        user_ratings = self.model.predict_ratings(user_idx)
 
-        return movie_idxs_orderred_by_ratings_desc
+        movies = self.dataset.movie_idx_id()
 
-    def __to_user_movie_input(self, user_idx, movies_count):
-        movie_idxs = np.linspace(0, movies_count - 1, movies_count, dtype=int)
-        user_idxs = np.repeat(user_idx, movies_count)
-        return [user_idxs, movie_idxs]
+        user_ratings = pd.merge(user_ratings, movies, how='right', on='movie')
+
+        user_ratings = pd.merge(user_ratings, self.dataset.movies(), how='left', on='movieId')
+        user_ratings = user_ratings[['predicted_rating', 'title', 'movieId', 'movie']]
+        user_ratings = user_ratings.sort_values(by=['predicted_rating'], inplace=False, ascending=False)
+
+        return user_ratings if limit == -1 else user_ratings[:limit]

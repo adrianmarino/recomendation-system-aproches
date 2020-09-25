@@ -2,3 +2,4 @@ from .generator.xy.in_memory_xy_data_generator import InMemoryXyDataGenerator
 from .generator.dataset.dataset_data_generator import DataSetDataGenerator
 from .indexes_batch_generator import IndexesBatchGenerator
 from .movie_lens_data_source import MovieLensDataSource
+from .dataset import Dataset

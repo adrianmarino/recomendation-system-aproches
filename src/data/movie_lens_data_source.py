@@ -6,6 +6,8 @@ from zipfile import ZipFile
 import pandas as pd
 import tensorflow.keras as keras
 
+from data.dataset import Dataset
+
 
 class MovieLensDataSource:
     def __init__(self):
@@ -29,3 +31,10 @@ class MovieLensDataSource:
 
     def get_df(self, filename='ratings.csv'):
         return pd.read_csv(self.__dataset_path / filename)
+
+    def dataset(self):
+        ratings = self.get_df('ratings.csv')
+        movies = self.get_df('movies.csv')
+        tags = self.get_df('tags.csv')
+        links = self.get_df('links.csv')
+        return Dataset(ratings, movies, tags, links)

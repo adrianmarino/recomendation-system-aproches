@@ -10,3 +10,5 @@ from .wide_and_deep.model_input_builder import ModelInputBuilder
 from .wide_and_deep.wide_and_deep_model import Layer, WideAndDeepModelFactory
 
 from .recommender.recommender import Recommender
+from .recommender.value_index_mapper import ValueIndexMapper
+from .model import Model
