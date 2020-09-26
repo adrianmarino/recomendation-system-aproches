@@ -7,3 +7,4 @@ glob
 logs/
 temp/deep_model_weights.h5
 model.png
+deep_model_weights.h5
