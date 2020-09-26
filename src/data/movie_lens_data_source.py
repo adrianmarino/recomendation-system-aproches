@@ -10,13 +10,17 @@ from data.dataset import Dataset
 
 
 class MovieLensDataSource:
-    def __init__(self):
-        url = "http://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
+    @staticmethod
+    def sizes(): return ['ml-latest-small', 'ml-25m','ml-latest']
+    
+    def __init__(self, size='ml-latest-small'):
+        url = f'http://files.grouplens.org/datasets/movielens/{size}.zip'
+
         zipped_file = keras.utils.get_file(
-            "ml-latest-small.zip", url, extract=False
+            f'{size}.zip', url, extract=False
         )
         keras_datasets_path = Path(zipped_file).parents[0]
-        self.__dataset_path = keras_datasets_path / "ml-latest-small"
+        self.__dataset_path = keras_datasets_path / size
 
         if not self.__dataset_path.exists():
             with ZipFile(zipped_file, "r") as zip:

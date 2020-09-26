@@ -15,7 +15,7 @@ class EmbeddingDenseModelFactory:
             max_rating,
             lr=0.001,
             units=[200],
-            dropout=[0, 0]
+            dropout=[0, 0],
             loss='mean_squared_error'
     ):
         user_input = Input(shape=(1,), name='users_idx')
