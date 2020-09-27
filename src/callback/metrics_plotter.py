@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from IPython.display import clear_output
 from tensorflow.keras.callbacks import Callback
+import logging
 
 from util.metrics import MetricMeterBuilder
 
@@ -78,7 +79,7 @@ class MetricsPlotter(Callback):
             self.val_bach_index = 0
 
     def __print_meters(self, output):
-        print('\nValidation:')
+        print('\nVal metrics:')
         [print(f'  - {line}') for line in output]
 
     def __build_metric_meters(self, logs, score):
@@ -94,8 +95,9 @@ class MetricsPlotter(Callback):
 
     def __evaluate_model(self):
         if self.has_validation_set():
-            print(f'\n\nEvaluate model (Each {self.__evaluate_interval} steps):')
             val_features, val_labels = self.get_validation_data()
+
+            print(f'\n\nEvaluate model each {self.__evaluate_interval} steps(Batch-size: {self.val_batch_size}):')
 
             score = self.model.evaluate(
                 val_features,

@@ -8,3 +8,6 @@ logs/
 temp/deep_model_weights.h5
 model.png
 deep_model_weights.h5
+deep_model_weights_ml-latest-small.h5
+deep_model_weights_ml-latest.h5
+deep_model_weights_ml-25m.h5

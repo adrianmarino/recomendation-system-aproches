@@ -1,3 +1,4 @@
+import numpy as np
 import tensorflow
 
 """
@@ -20,6 +21,24 @@ def plot_default_hyper_model(
         rankdir=rankdir
     )
 """
+
+
+def random_color():
+    return np.random.rand(3,)
+
+
+def constains(array, element, comparator=lambda x, y: np.array_equal(x, y)):
+    return len([e for e in array if comparator(e, element)]) > 0
+
+
+def random_colors(count, distance=0.4):
+    colors = list()
+    comparator = lambda x, y: np.linalg.norm(x-y) < distance
+    while len(colors) < count:
+        color = random_color()
+        if not constains(colors, color, comparator):
+            colors.append(color)
+    return colors
 
 
 def plot_model(

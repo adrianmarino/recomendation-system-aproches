@@ -11,8 +11,8 @@ from data.dataset import Dataset
 
 class MovieLensDataSource:
     @staticmethod
-    def sizes(): return ['ml-latest-small', 'ml-25m','ml-latest']
-    
+    def sizes(): return ['ml-latest-small', 'ml-25m', 'ml-latest']
+
     def __init__(self, size='ml-latest-small'):
         url = f'http://files.grouplens.org/datasets/movielens/{size}.zip'
 

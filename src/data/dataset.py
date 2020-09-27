@@ -59,7 +59,9 @@ class Dataset:
         return movies.drop_duplicates()
 
     def movies_by_ids(self, ids):
-        return self.__movies[self.__movies['movieId'].isin(ids)]
+        d =  self.__movies[self.__movies['movieId'].isin(ids)]
+        d = pd.merge(d, self.ratings(), how='left', on='movieId')
+        return d[['movieId', 'movie', 'title', 'genres']].drop_duplicates()
 
     def movies(self): return self.__movies
 

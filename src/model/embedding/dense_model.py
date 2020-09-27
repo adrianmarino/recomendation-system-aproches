@@ -14,7 +14,7 @@ class EmbeddingDenseModelFactory:
             min_rating,
             max_rating,
             lr=0.001,
-            units=[200],
+            units=[300, 100],
             dropout=[0, 0],
             loss='mean_squared_error'
     ):
@@ -25,14 +25,17 @@ class EmbeddingDenseModelFactory:
         movie_emb = EmbeddingLayer(n_movies, n_factors, name='movies_embedding')(movie_input)
 
         x = Concatenate()([user_emb, movie_emb])
-        x = Dropout(dropout[0])(x)
+        if dropout[0] > 0:
+            x = Dropout(dropout[0])(x)
 
-        x = Dense(500, kernel_initializer='he_normal')(x)
-        x = Activation('relu')(x)
-        x = Dropout(dropout[1])(x)
- 
+        for layer_units, layer_dropout in zip(units, dropout):
+            x = Dense(layer_units, kernel_initializer='he_normal')(x)
+            x = Activation('relu')(x)
+            if layer_dropout > 0:
+                x = Dropout(layer_dropout)(x)
+
         x = Dense(1, kernel_initializer='he_normal')(x)
-        x = Activation('sigmoid', name='sigmoid_activiation')(x)
+        x = Activation('sigmoid', name='sigmoid_activation')(x)
         x = Lambda(lambda p: p * (max_rating - min_rating) + min_rating, name='user_rating_prediction')(x)
 
         model = Model(
