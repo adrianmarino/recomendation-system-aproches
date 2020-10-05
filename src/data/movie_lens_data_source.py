@@ -33,6 +33,10 @@ class MovieLensDataSource:
         path = str(self.__dataset_path / '*.csv')
         return [os.path.basename(f) for f in glob.glob(path)]
 
+    def file_paths(self):
+        path = str(self.__dataset_path / '*.csv')
+        return [f for f in glob.glob(path)]
+
     def get_df(self, filename='ratings.csv'):
         return pd.read_csv(self.__dataset_path / filename)
 

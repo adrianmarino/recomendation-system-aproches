@@ -14,6 +14,8 @@ dependencies:
     - hurry.filesize
     - pydot
     - jupyterlab
+    - findspark
+    - pyspark
     - pip
     - pip:
         #- tensorflow>=2.3.0
