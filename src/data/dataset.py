@@ -16,7 +16,7 @@ class Dataset:
         self.__ratings = ratings
         self.__movies = movies
         self.__tags = tags
-        self.__links = linkscall
+        self.__links = links
 
     def n_users(self):
         return self.__ratings['user'].nunique()

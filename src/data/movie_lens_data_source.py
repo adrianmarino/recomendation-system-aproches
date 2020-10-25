@@ -7,11 +7,18 @@ import pandas as pd
 import tensorflow.keras as keras
 
 from data.dataset import Dataset
+from util import read_csv
+
+PANDAS_DF = 'pandas_data_frame'
+
+SPARK_DF = 'spark_data_frame'
 
 
 class MovieLensDataSource:
+
     @staticmethod
-    def sizes(): return ['ml-latest-small', 'ml-25m', 'ml-latest']
+    def sizes():
+        return ['ml-latest-small', 'ml-25m', 'ml-latest']
 
     def __init__(self, size='ml-latest-small'):
         url = f'http://files.grouplens.org/datasets/movielens/{size}.zip'
@@ -37,8 +44,13 @@ class MovieLensDataSource:
         path = str(self.__dataset_path / '*.csv')
         return [f for f in glob.glob(path)]
 
-    def get_df(self, filename='ratings.csv'):
-        return pd.read_csv(self.__dataset_path / filename)
+    def get_df(self, filename='ratings.csv', session=None, data_frame_type=PANDAS_DF):
+        path = f'{self.__dataset_path}/{filename}'
+
+        if data_frame_type == PANDAS_DF:
+            return pd.read_csv(path)
+        elif data_frame_type == SPARK_DF:
+            return read_csv(session, path)
 
     def dataset(self):
         ratings = self.get_df('ratings.csv')
