@@ -1,5 +1,6 @@
 import pyspark.sql as s
 import pyspark.sql.functions as f
+import numpy as np
 
 
 def read_csv(session, path):
@@ -26,3 +27,12 @@ def train_test_split(df, test_size=0.3, seed=None):
 def add_seq_col(df, column_name='seq'):
     w = s.Window().partitionBy(f.lit('a')).orderBy(f.lit('a'))
     return df.withColumn(column_name, f.row_number().over(w) - 1).sort(column_name)
+
+
+def get_columns(df, column_names):
+    df = df.toPandas()
+    return np.array([df[c].values for c in column_names])
+
+
+def get_rows(df, column_names):
+    return np.array(df.select(column_names).rdd.map(tuple).collect())

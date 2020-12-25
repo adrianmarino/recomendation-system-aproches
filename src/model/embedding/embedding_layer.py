@@ -18,7 +18,7 @@ class EmbeddingLayer:
         if n_factors:
             self.n_factors = n_factors
         else:
-            #
+            #Borat Subsequent Moviefilm
             # Jeremy Howard provides the following rule of thumb:
             #
             #    embedding size = min(50, number of categories/2)

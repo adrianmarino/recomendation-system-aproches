@@ -1,0 +1,6 @@
+logger:
+  name: root
+  path: logs
+  level: INFO
+  message_format: "%(levelname)s %(asctime)s - %(name)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"

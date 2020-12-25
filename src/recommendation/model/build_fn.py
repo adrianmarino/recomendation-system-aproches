@@ -10,9 +10,11 @@ def embedding_input(n_items, n_min_factors, name, shape=(1,), l2_delta=1e-6):
         n_items=n_items,
         n_min_factors=n_min_factors,
         l2_delta=l2_delta,
-        name=f'{name}_embedding')(input)
+        name=f'{name}_embedding'
+    )(input)
 
     return input, emb
+
 
 def biased_embedding_input(n_items, n_min_factors, name, shape=(1,), l2_delta=1e-6):
     input = Input(shape=shape, name=f'{name}_idx')

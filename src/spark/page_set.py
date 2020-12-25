@@ -1,3 +1,5 @@
+import logging
+
 import pyspark.sql.functions as f
 
 from .functions import shuffle_df, add_seq_col
@@ -21,12 +23,24 @@ class PageSet:
         # Add sequence column...
         self.data_frame = add_seq_col(data_frame, seq_col)
 
-        # Get rows count...
+        total_count = self.data_frame.count()
+
+        # Get pages count...
         if page_count:
             self.page_count = page_count
         else:
-            last_row = self.data_frame.select(seq_col).tail(1)
-            self.page_count = last_row[0][0] + 1
+            self.page_count = int(total_count / page_size)
+
+        self.__check_page_size(total_count, self.page_count, self.page_size)
+
+        self._logger = logging.getLogger(f'page-set-{id(self)}')
+        self._logger.debug(f'Page Size: {page_size}')
+        self._logger.debug(f'Pages Count: {self.page_count}')
+        self._logger.debug(f'Total elements: {self.data_frame.count()}')
+
+    def __check_page_size(self, total_count, page_count, page_size):
+        calculated_page_size = int(total_count / page_count)
+        assert calculated_page_size == page_size, f'Unexpected page size {calculated_page_size} != {page_size}'
 
     def columns(self):
         return sub_list(self.data_frame.columns, [self.seq_col])
@@ -40,14 +54,18 @@ class PageSet:
     def get(self, number, seq_col=False):
         start = number * self.page_size
         end = start + (self.page_size - 1 if self.page_size > 1 else 0)
+        
         page = self.data_frame.where(f.col(self.seq_col).between(start, end))
+
+        self._logger.debug('Get page number: %s from %s to %s with %s size', number, start, end, page.count())
+
         return page if seq_col else page.select(self.columns())
 
     def __delitem__(self, key):
-        raise Exception('Can not modify an immutabr PageSet instance!')
+        raise Exception('Can not modify an immutable PageSet instance!')
 
     def __getitem__(self, number):
         return self.get(number)
 
     def __setitem__(self, key, value):
-        raise Exception('Can not modify an immutabr PageSet instance!')
+        raise Exception('Can not modify an immutable PageSet instance!')

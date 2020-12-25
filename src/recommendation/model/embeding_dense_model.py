@@ -1,6 +1,7 @@
 from tensorflow.keras.layers import Concatenate, Dropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
+import logging
 
 from recommendation.model.build_fn import embedding_input, dense_layers
 

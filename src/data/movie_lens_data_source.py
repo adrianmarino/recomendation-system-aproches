@@ -7,7 +7,7 @@ import pandas as pd
 import tensorflow.keras as keras
 
 from data.dataset import Dataset
-from util import read_csv
+from spark import read_csv
 
 PANDAS_DF = 'pandas_data_frame'
 
