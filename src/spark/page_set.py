@@ -8,58 +8,69 @@ from .functions import shuffle_df, add_seq_col
 def sub_list(a, b): return list(set(a) - set(b))
 
 
+class NotFoundPageException(Exception):
+    def __init__(self, page_number, pages_count):
+        self.page_number = page_number
+        self.pages_count = pages_count
+        self.message = f'Not found {page_number} page! Pages: (0, {pages_count - 1})'
+        super().__init__(self.message)
+
+
 class PageSet:
-    def __init__(self, data_frame, page_size, seq_col='row_seq', shuffle=False, page_count=None):
-        self.seq_col = seq_col
-        self.page_size = page_size
+    def __init__(self, data_frame, page_size, row_seq='row_seq', shuffle=False, page_count=None):
+        self.__row_seq = row_seq
+        self.__page_size = page_size
 
         # Shuffle when is specified...
         if shuffle:
             data_frame = shuffle_df(data_frame)
 
         # Exclude seq_col...
-        data_frame = data_frame.select(sub_list(data_frame.columns, [seq_col]))
+        data_frame = data_frame.select(sub_list(data_frame.columns, [row_seq]))
 
         # Add sequence column...
-        self.data_frame = add_seq_col(data_frame, seq_col)
+        self.__data_frame = add_seq_col(data_frame, row_seq)
 
-        total_count = self.data_frame.count()
+        self.__elements_count = self.__data_frame.count()
 
         # Get pages count...
         if page_count:
-            self.page_count = page_count
+            self.__pages_count = page_count
         else:
-            self.page_count = int(total_count / page_size)
-
-        self.__check_page_size(total_count, self.page_count, self.page_size)
+            pages_count = self.__elements_count / self.__page_size
+            self.__pages_count = int(pages_count) if pages_count % 2 == 0 else int(pages_count) + 1
 
         self._logger = logging.getLogger(f'page-set-{id(self)}')
-        self._logger.debug(f'Page Size: {page_size}')
-        self._logger.debug(f'Pages Count: {self.page_count}')
-        self._logger.debug(f'Total elements: {self.data_frame.count()}')
-
-    def __check_page_size(self, total_count, page_count, page_size):
-        calculated_page_size = int(total_count / page_count)
-        assert calculated_page_size == page_size, f'Unexpected page size {calculated_page_size} != {page_size}'
+        self._logger.info(f'Page Size: {self.__page_size}')
+        self._logger.info(f'Pages Count: {self.__pages_count}')
+        self._logger.info(f'Total elements: {self.__elements_count}')
 
     def columns(self):
-        return sub_list(self.data_frame.columns, [self.seq_col])
+        return sub_list(self.__data_frame.columns, [self.__row_seq])
 
     def size(self):
-        return self.page_count
+        return self.__pages_count
+
+    def elements_count(self):
+        return self.__elements_count
 
     def shuffled(self):
-        return PageSet(self.data_frame, self.page_size, self.seq_col, True, self.page_count)
+        return PageSet(self.__data_frame, self.__page_size, self.__row_seq, True, self.__pages_count)
 
     def get(self, number, seq_col=False):
-        start = number * self.page_size
-        end = start + (self.page_size - 1 if self.page_size > 1 else 0)
-        
-        page = self.data_frame.where(f.col(self.seq_col).between(start, end))
+        start = number * self.__page_size
+        end = start + (self.__page_size - 1 if self.__page_size > 1 else 0)
+
+        page = self.__data_frame.where(f.col(self.__row_seq).between(start, end))
+
+        if len(page.head(1)) == 0:
+            raise NotFoundPageException(number, self.__pages_count)
 
         self._logger.debug('Get page number: %s from %s to %s with %s size', number, start, end, page.count())
 
-        return page if seq_col else page.select(self.columns())
+        result = page if seq_col else page.select(self.columns())
+
+        return result
 
     def __delitem__(self, key):
         raise Exception('Can not modify an immutable PageSet instance!')

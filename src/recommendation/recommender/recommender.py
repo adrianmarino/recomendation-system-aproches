@@ -1,7 +1,7 @@
 import pandas as pd
 
 from model.embedding.simmilarity_model import SimilarityModel
-from recommendation.model import Model
+from recommendation.modelhelper import ModelHelper
 from recommendation.recommender.value_index_mapper import ValueIndexMapper
 
 
@@ -11,7 +11,7 @@ def revert(array): return array[::-1]
 class Recommender:
 
     def __init__(self, model, dataset):
-        self.model = Model(model)
+        self.model = ModelHelper(model)
         self.dataset = dataset
         self.user_converter = ValueIndexMapper(dataset.ratings(), value_col='userId', index_col='user')
         self.movie_converter = ValueIndexMapper(dataset.ratings(), value_col='movieId', index_col='movie')

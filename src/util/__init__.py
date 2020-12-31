@@ -5,3 +5,4 @@ from .pca.pca_plotter import *
 from .plot import *
 from .config import *
 from .logger_factory import *
+from .os_utils import *

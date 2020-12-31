@@ -4,7 +4,7 @@ import numpy as np
 
 
 def read_csv(session, path):
-    return session.read.csv(path, inferSchema=True, header=True, mode="DROPMALFORMED").cache()
+    return session.read.csv(path, inferSchema=True, header=True, mode="DROPMALFORMED")
 
 
 def write_csv(df, path, sep=','):

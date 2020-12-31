@@ -1,11 +1,15 @@
 import glob
 import os
-
+import shutil
 
 def create_path(path):
     if not os.path.exists(path):
         os.makedirs(path)
     return path
+
+def remove_dir(path):
+    if os.path.exists(path) and os.path.isdir(path):
+        shutil.rmtree(path)
 
 
 def create_file_path(path, filename, ext=''):

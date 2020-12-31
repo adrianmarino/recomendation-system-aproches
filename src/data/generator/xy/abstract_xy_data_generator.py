@@ -2,7 +2,7 @@ import abc
 
 from tensorflow.keras.utils import Sequence
 
-from data.indexes_batch_generator import IndexesBatchGenerator
+from data import IndexesBatchGenerator
 
 
 class AbstractXyDataGenerator(Sequence):

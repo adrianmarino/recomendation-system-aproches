@@ -1,7 +1,6 @@
 from tensorflow.keras.layers import Concatenate, Dropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
-import logging
 
 from recommendation.model.build_fn import embedding_input, dense_layers
 
@@ -19,7 +18,7 @@ class EmbeddingDenseModelFactory:
             dropout=[0, 0],
             loss='mean_squared_error'
     ):
-        user_input,user_emb = embedding_input(n_users, n_factors, 'users')
+        user_input, user_emb = embedding_input(n_users, n_factors, 'users')
         movie_input, movie_emb = embedding_input(n_movies, n_factors, 'movies')
 
         net = Concatenate()([user_emb, movie_emb])

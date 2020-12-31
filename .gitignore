@@ -9,3 +9,4 @@ temp/deep_model_weights.h5
 model.png
 dataset/
 weights/
+**/temp/

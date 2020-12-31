@@ -1,3 +1,6 @@
 from .model.user_movie_gender_embeding_dense_model import UserMovieGenderEmbeddingDenseModelFactory
+from .model.embeding_dense_model import EmbeddingDenseModelFactory
 from .model.dot_model import EmbeddingDotModelFactory
-
+from .recommender.recommender import Recommender
+from .recommender.value_index_mapper import ValueIndexMapper
+from .modelhelper import ModelHelper
