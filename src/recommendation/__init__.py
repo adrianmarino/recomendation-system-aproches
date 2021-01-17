@@ -4,3 +4,4 @@ from .model.dot_model import EmbeddingDotModelFactory
 from .recommender.recommender import Recommender
 from .recommender.value_index_mapper import ValueIndexMapper
 from .modelhelper import ModelHelper
+from .data.recommendations_data_generator import *

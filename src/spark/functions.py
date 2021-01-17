@@ -1,6 +1,6 @@
+import numpy as np
 import pyspark.sql as s
 import pyspark.sql.functions as f
-import numpy as np
 
 
 def read_csv(session, path):

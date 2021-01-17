@@ -1,8 +1,7 @@
-from tensorflow.keras.layers import Input, Dot
+from tensorflow.keras.layers import Dot
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 
-from model import EmbeddingLayer
 from recommendation.model.build_fn import embedding_input
 
 

@@ -2,6 +2,7 @@ import logging
 
 import pyspark.sql.functions as f
 
+from util.profiler import Profiler
 from .functions import shuffle_df, add_seq_col
 
 
@@ -61,12 +62,19 @@ class PageSet:
         start = number * self.__page_size
         end = start + (self.__page_size - 1 if self.__page_size > 1 else 0)
 
-        page = self.__data_frame.where(f.col(self.__row_seq).between(start, end))
+        with Profiler('Get page'):
+            page = self.__data_frame.where(f.col(self.__row_seq).between(start, end))
 
         if len(page.head(1)) == 0:
             raise NotFoundPageException(number, self.__pages_count)
 
-        self._logger.debug('Get page number: %s from %s to %s with %s size', number, start, end, page.count())
+        self._logger.debug(
+            'Get page number: %s from %s to %s with %s size. Time: %s ms',
+            number,
+            start,
+            end,
+            page.count()
+        )
 
         result = page if seq_col else page.select(self.columns())
 

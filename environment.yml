@@ -17,6 +17,7 @@ dependencies:
     - pyspark>=3.0.0
     - findspark
     - pyyaml
+    - humanize
     - pip
     - pip:
         - tf-nightly-gpu
