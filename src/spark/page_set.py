@@ -1,4 +1,5 @@
 import logging
+import humanize
 
 import pyspark.sql.functions as f
 
@@ -42,9 +43,9 @@ class PageSet:
             self.__pages_count = int(pages_count) if pages_count % 2 == 0 else int(pages_count) + 1
 
         self._logger = logging.getLogger(f'page-set-{id(self)}')
-        self._logger.info(f'Page Size: {self.__page_size}')
-        self._logger.info(f'Pages Count: {self.__pages_count}')
-        self._logger.info(f'Total elements: {self.__elements_count}')
+        self._logger.info(f'Page Size: {humanize.intword(self.__page_size)}')
+        self._logger.info(f'Pages Count: {humanize.intword(self.__pages_count)}')
+        self._logger.info(f'Total elements: {humanize.intword(self.__elements_count)}')
 
     def columns(self):
         return sub_list(self.__data_frame.columns, [self.__row_seq])

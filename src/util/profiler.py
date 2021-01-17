@@ -23,5 +23,7 @@ class Profiler:
 
     def __exit__(self, type, value, traceback):
         delta = dt.timedelta(seconds=self.__stop_time())
-        humanized_delta = humanize.precisedelta(delta, suppress=["days"], format="%0f")
+        
+        humanized_delta = humanize.precisedelta(delta, minimum_unit="microseconds", format="%0.0f")
+        
         self.__logger.info(f'Desc: \'{self.__desc}\' - Time: {humanized_delta}')
