@@ -1,6 +1,6 @@
+import numpy as np
+
 from data.generator.data_frame.data_frame_data_generatror import DataFrameDataGenerator
-from spark import get_rows
-from util.profiler import Profiler
 
 
 class RecommendationsDataGenerator(DataFrameDataGenerator):
@@ -23,12 +23,18 @@ class RecommendationsDataGenerator(DataFrameDataGenerator):
         self.__column_manager = column_manager
 
     def _features(self, page, columns):
-        with Profiler('Resolve users embedding'):
-            emb1 = get_rows(page, self.__column_manager.emb_features[0])
+        embeddings = np.array(
+            page.select(self.__column_manager.emb_features) \
+                .rdd \
+                .map(tuple) \
+                .collect()
+        )
 
-        with Profiler('Resolve movies embedding'):
-            emb2 = get_rows(page, self.__column_manager.emb_features[1])
+        genres = np.array(
+            page.select(self.__column_manager.gender_features) \
+                .rdd \
+                .map(lambda t: np.array(t)) \
+                .collect()
+        )
 
-        with Profiler('Resolve genders one-hot array'):
-            genders = get_rows(page, self.__column_manager.gender_features)
-        return [emb1, emb2, genders]
+        return [embeddings[:, 0], embeddings[:, 1], genres]

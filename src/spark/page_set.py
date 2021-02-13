@@ -31,7 +31,7 @@ class PageSet:
         data_frame = data_frame.select(sub_list(data_frame.columns, [row_seq]))
 
         # Add sequence column...
-        self.__data_frame = add_seq_col(data_frame, row_seq)
+        self.__data_frame = add_seq_col(data_frame, row_seq).cache()
 
         self.__elements_count = self.__data_frame.count()
 
@@ -63,8 +63,8 @@ class PageSet:
         start = number * self.__page_size
         end = start + (self.__page_size - 1 if self.__page_size > 1 else 0)
 
-        with Profiler('Get page'):
-            page = self.__data_frame.where(f.col(self.__row_seq).between(start, end))
+        # with Profiler('Get page'):
+        page = self.__data_frame.where(f.col(self.__row_seq).between(start, end))
 
         if len(page.head(1)) == 0:
             raise NotFoundPageException(number, self.__pages_count)

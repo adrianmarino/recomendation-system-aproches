@@ -21,3 +21,5 @@ dependencies:
     - pip
     - pip:
         - tf-nightly-gpu
+        - ray
+        - modin[ray]

@@ -4,7 +4,6 @@ from tensorflow.keras.utils import Sequence
 
 from spark import get_rows
 from spark.page_set import PageSet
-from util.profiler import Profiler
 
 
 class DataFrameDataGenerator(Sequence):
@@ -25,16 +24,15 @@ class DataFrameDataGenerator(Sequence):
     def __len__(self): return self.__page_set.size()
 
     def __getitem__(self, index):
-        self._logger.debug('index(0-%s): %s', self.__page_set.size()-1, index)
+        self._logger.debug('index(0-%s): %s', self.__page_set.size() - 1, index)
 
         page = self.__page_set[index]
 
-        with Profiler('Resolve features') as profiler:
-            X = self._features(page, self.__feature_columns)
-            profiler.logger.info(f'Size: {len(X)}')
+        # with Profiler('Resolve features') as profiler:
+        X = self._features(page, self.__feature_columns)
 
-        with Profiler('Resolve labels'):
-            y = self._labels(page, self.__label_columns)
+        # with Profiler('Resolve labels') as profiler:
+        y = self._labels(page, self.__label_columns)
 
         return (X, y)
 

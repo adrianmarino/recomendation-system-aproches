@@ -9,8 +9,8 @@ class SparkSessionFactory:
         return SparkSession.builder \
             .master("local[*]") \
             .appName("recommendations") \
-            .config('spark.executor.memory', '2G') \
-            .config('spark.driver.memory','3G') \
+            .config('spark.executor.memory', '1G') \
+            .config('spark.driver.memory','4G') \
             .config('spark.executor.instances', 12) \
             .getOrCreate()
     
