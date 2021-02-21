@@ -8,5 +8,7 @@ logs/
 temp/deep_model_weights.h5
 model.png
 dataset/
-weights/
+**/
+**/checkpoints/
+**/tunner/
 **/temp/

@@ -10,7 +10,7 @@ def create_path(path):
 def remove_dir(path):
     if os.path.exists(path) and os.path.isdir(path):
         shutil.rmtree(path)
-
+    return path
 
 def create_file_path(path, filename, ext=''):
     return os.path.join(create_path(path), f'{filename}{"." if ext else ""}{ext}')

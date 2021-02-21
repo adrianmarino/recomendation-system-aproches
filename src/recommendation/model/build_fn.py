@@ -32,7 +32,7 @@ def biased_embedding_input(n_items, n_min_factors, name, shape=(1,), l2_delta=1e
 
 def dense_layers(net, units, dropout, min_rating, max_rating):
     for layer_units, layer_dropout in zip(units, dropout):
-        net = Dense(layer_units, kernel_initializer='he_normal')(net)
+        net = Dense(units=layer_units, kernel_initializer='he_normal')(net)
         net = Activation('relu')(net)
         if layer_dropout > 0:
             net = Dropout(layer_dropout)(net)

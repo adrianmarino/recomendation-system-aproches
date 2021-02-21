@@ -45,7 +45,7 @@ def plot_model(
         model,
         show_shapes=True,
         show_layer_names=True,
-        dpi="100",
+        dpi="60",
         rankdir="LR"
 ):
     return tensorflow.keras.utils.plot_model(

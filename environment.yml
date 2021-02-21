@@ -4,7 +4,7 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-    - python
+    - python=3.6
     - numpy
     - matplotlib
     - pandas
@@ -20,6 +20,7 @@ dependencies:
     - humanize
     - pip
     - pip:
-        - tf-nightly-gpu
+        - tensorflow
         - ray
         - modin[ray]
+        - keras-tuner
