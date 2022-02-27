@@ -1,0 +1,1 @@
+from .recommendations_data_generator import RecommendationsDataGenerator

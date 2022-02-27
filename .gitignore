@@ -4,11 +4,12 @@ cv2
 glob
 **/.ipynb_checkpoints/
 
-logs/
-temp/deep_model_weights.h5
-model.png
-dataset/
-**/
+**/model.png
+
+datasets/
+weights/
+
 **/checkpoints/
-**/tunner/
+**/tunes/
 **/temp/
+**/logs/
