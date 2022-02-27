@@ -1,5 +1,3 @@
-import logging
-
 import numpy as np
 from tensorflow.keras.layers import Embedding, Reshape
 from tensorflow.keras.regularizers import l2

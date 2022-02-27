@@ -1,2 +1,2 @@
-from .embedding.embedding_layer import EmbeddingLayer
-from .embedding.simmilarity_model import SimilarityModel
+from .embedding import *
+from .feature_column import FeatureColumn

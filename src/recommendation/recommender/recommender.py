@@ -1,7 +1,7 @@
 import pandas as pd
 
 from model.embedding.simmilarity_model import SimilarityModel
-from recommendation.modelhelper import ModelHelper
+from recommendation.model_helper import ModelHelper
 from recommendation.recommender.value_index_mapper import ValueIndexMapper
 
 

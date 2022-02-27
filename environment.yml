@@ -18,8 +18,8 @@ dependencies:
     - humanize
     - pip
     - pip:
-        - tensorflow 
-        - tensorflow-recommenders
+        - tensorflow
+        # - tensorflow-recommenders
         - tensorflow-datasets
         - ipywidgets
         - ray
