@@ -1,8 +1,7 @@
 # Recommendation system approaches
 
 Implementation, test and comparatives of different recommendation models (Collaborative filtering like).  
-
-
+ 
 # Models
 
 * **Embedding dot model**
@@ -39,5 +38,51 @@ Implementation, test and comparatives of different recommendation models (Collab
   * [2. Dataset preprocecing and train/validation/test split](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/2.train-test-sets-building.ipynb)  
   * [3.1. Model training/validation (Pandas Ray version)](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/3.train-model-pandas-ray.ipynb)
   * [3.2. Model training/validation (Spark version)](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/3.train-model-spark.ipynb)
+
+
+## Requisites
+
+* [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
+## Getting starter
+
+**Step 1**: Clone repo.
+
+```bash
+$ git clone https://github.com/adrianmarino/recommendation-system-approaches.git
+$ cd recommendation-system-approaches
+```
+
+**Step 2**: Create environment.
+
+```bash
+$ conda env create -f environment.yml
+```
+
+**Step 3**: Enable project environment.
+
+```bash
+$ conda activate recommendations
+```
+
+## Open notebooks locally
+
+**Step 1**: Enable project environment.
+
+```bash
+$ conda activate recommendations
+```
+
+**Step 2**: under project directory boot jupyter lab.
+
+```bash
+$ jupyter lab
+
+Jupyter Notebook 6.1.4 is running at:
+http://localhost:8888/?token=45efe99607fa6......
+```
+
+**Step 3**: Go to http://localhost:8888.... as indicated in the shell output.
+
 
 
