@@ -34,7 +34,7 @@ Implementation, test and comparatives of different recommendation models (Collab
 
 * [Recommendation system: Approaches](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/recommendation-system-comparatives.ipynb)
 * [Recommendation systems: Deep Model only](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/deep-model-user-movie.ipynb)
-* User/movie/Genders Deep Model
+* User/Movie/Genders Deep Model
   * [1. Dataset preprocecing](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/1.input-data-building.ipynb)
   * [2. Dataset preprocecing and train/validation/test split](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/2.train-test-sets-building.ipynb)  
   * [3.1. Model training/validation (Pandas Ray version)](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/3.train-model-pandas-ray.ipynb)
