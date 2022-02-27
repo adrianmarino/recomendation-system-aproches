@@ -7,7 +7,7 @@ Implementation, test and comparatives of different recommendation models (Collab
 
 * **Embedding dot model**
   * Learn both users and movies embedding.
-  * Dot product beethen these to predict user rattings. 
+  * Dot product between these to predict user rattings. 
 * **Embedding biases dot model**
   * Add a bias to for each user an movie. Similar to the bias in a fully-connected layer or the intercept in a linear model. It just provides an extra degree of freedom.
   * Also pass dot product output through a sigmoid layer and then scaling the result using the min and max ratings in the data. This technique introduces a non-linearity into the output and results in a loss improvement.
