@@ -1,4 +1,4 @@
-# recommendation-system-approaches
+# Recommendation system approaches
 
 Implementation, test and comparatives of different recommendation models base on embeddings (Collaborative filtering like).  
 
