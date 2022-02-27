@@ -1,6 +1,6 @@
 # Recommendation system approaches
 
-Implementation, test and comparatives of different recommendation models base on embeddings (Collaborative filtering like).  
+Implementation, test and comparatives of different recommendation models (Collaborative filtering like).  
 
 
 # Models
@@ -21,6 +21,6 @@ Implementation, test and comparatives of different recommendation models base on
 * **Wide and deep model**
   * A mix bethween two models, linear regresion and **Embedding dense model**.
   * This model learn to combine memorization and generalization like humans do.
-  * Liner model learnin to memorize.
+  * Liner model learning to memorize.
   * Deep model generalize.
   * See: [Wide & Deep Learning: Better Together with TensorFlow](https://ai.googleblog.com/2016/06/wide-deep-learning-better-together-with.html)
