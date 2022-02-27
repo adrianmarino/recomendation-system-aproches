@@ -29,7 +29,7 @@ Implementation, test and comparatives of different recommendation models (Collab
   * See: [Wide & Deep Learning: Better Together with TensorFlow](https://ai.googleblog.com/2016/06/wide-deep-learning-better-together-with.html)
 
 * **Deep Factorization Machine Model**
- * **Pending**. See: [Deep Factorization Machine Model for CRT prediction.](https://github.com/adrianmarino/deep-fm).
+  * **Pending**. See: [Deep Factorization Machine Model for CRT prediction.](https://github.com/adrianmarino/deep-fm).
 
 # Notebooks
 
