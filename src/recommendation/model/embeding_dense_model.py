@@ -2,7 +2,7 @@ from tensorflow.keras.layers import Concatenate, Dropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 
-from recommendation.model.build_fn import embedding_input, dense_layers
+from recommendation.model.build_fn import embedding_input, ratting_dense_layers
 
 
 class EmbeddingDenseModelFactory:
@@ -25,7 +25,7 @@ class EmbeddingDenseModelFactory:
         if dropout[0] > 0:
             net = Dropout(dropout[0])(net)
 
-        net = dense_layers(net, units, dropout, min_rating, max_rating)
+        net = ratting_dense_layers(net, units, dropout, min_rating, max_rating)
 
         model = Model(
             inputs=[user_input, movie_input],

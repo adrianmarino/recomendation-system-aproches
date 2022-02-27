@@ -14,12 +14,15 @@ class LoggerFactory:
         self.__fmt = config['message_format']
         self.__date_fmt = config['date_format']
 
-    def create(self):
+    def create(self, clean_previous_handlers=True):
         logger = logging.getLogger()
         logger.setLevel(self.__level)
 
         # with this pattern, it's rarely necessary to propagate the error up to parent
         logger.propagate = False
+
+        if clean_previous_handlers:
+            logger.handlers.clear()
 
         # Console logger
         logger.addHandler(self.__setup_logger_handler(

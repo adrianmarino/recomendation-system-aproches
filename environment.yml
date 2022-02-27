@@ -4,23 +4,26 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-    - python=3.6
+    - python
     - numpy
     - matplotlib
     - pandas
-    - jupyterlab
     - scikit-learn
     - plotly
     - hurry.filesize
     - pydot
     - jupyterlab
-    - pyspark>=3.0.0
     - findspark
     - pyyaml
     - humanize
     - pip
     - pip:
-        - tensorflow
+        - tensorflow 
+        - tensorflow-recommenders
+        - tensorflow-datasets
+        - ipywidgets
         - ray
         - modin[ray]
         - keras-tuner
+        - pyspark>3.0.0
+

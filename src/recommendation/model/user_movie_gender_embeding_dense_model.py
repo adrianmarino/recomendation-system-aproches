@@ -1,8 +1,9 @@
+from keras.layers import Activation, Dense
 from tensorflow.keras.layers import Input, Concatenate, Dropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 
-from recommendation.model.build_fn import dense_layers, embedding_input
+from recommendation.model.build_fn import dense_layers, embedding_input, ratting_dense_layers
 
 
 class UserMovieGenderEmbeddingDenseModelFactory:
@@ -25,11 +26,11 @@ class UserMovieGenderEmbeddingDenseModelFactory:
         movie_input, movie_emb = embedding_input(n_movies, movie_n_min_factors, 'movies')
         gender_input = Input(shape=(n_genders,), name='genders')
 
-        net = Concatenate()([user_emb, movie_emb, gender_input])
+        net = Concatenate()([user_emb, movie_emb])
         if dropout[0] > 0:
             net = Dropout(dropout[0])(net)
 
-        net = dense_layers(net, units, dropout, min_rating, max_rating)
+        net = ratting_dense_layers(net, units, dropout, min_rating, max_rating)
 
         model = Model(
             inputs=[user_input, movie_input, gender_input],

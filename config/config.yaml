@@ -2,5 +2,5 @@ logger:
   name: root
   path: logs
   level: INFO
-  message_format: "%(levelname)s %(asctime)s - %(name)s - %(message)s"
-  date_format: "%Y-%m-%d %H:%M:%S"
+  message_format: '%(asctime)s %(levelname)-1s %(message)s'
+  date_format: '%Y-%m-%d %H:%M:%S'

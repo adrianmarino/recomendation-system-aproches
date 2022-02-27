@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 from tensorflow.keras.layers import Embedding, Reshape
 from tensorflow.keras.regularizers import l2
@@ -18,12 +20,12 @@ class EmbeddingLayer:
         if n_factors:
             self.n_factors = n_factors
         else:
-            #Borat Subsequent Moviefilm
+            # Borat Subsequent Moviefilm
             # Jeremy Howard provides the following rule of thumb:
             #
             #    embedding size = min(50, number of categories/2)
             #
-            self.n_factors = min(np.ceil(n_items / 2), n_min_factors)
+            self.n_factors = int(min(np.ceil(n_items / 2), n_min_factors))
 
         self.l2_delta = l2_delta
         self.initializer = initializer
