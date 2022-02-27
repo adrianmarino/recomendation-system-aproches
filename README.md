@@ -85,4 +85,4 @@ http://localhost:8888/?token=45efe99607fa6......
 **Step 3**: Go to http://localhost:8888.... as indicated in the shell output.
 
 
-**Note**: Yo edit source code user [Pycharm community](https://www.jetbrains.com/pycharm/download/#section=linux) for more comfort.
+**Note**: Yo edit source code use [Pycharm community](https://www.jetbrains.com/pycharm/download/#section=linux) for more comfort.
