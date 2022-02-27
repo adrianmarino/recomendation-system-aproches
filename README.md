@@ -29,3 +29,15 @@ Implementation, test and comparatives of different recommendation models (Collab
   * Deep model learning to generalize.
   * See: [Wide & Deep Learning: Better Together with TensorFlow](https://ai.googleblog.com/2016/06/wide-deep-learning-better-together-with.html)
 
+
+# Notebooks
+
+* [Recommendation system: Approaches](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/recommendation-system-comparatives.ipynb)
+* [Recommendation systems: Deep Model only](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/deep-model-user-movie.ipynb)
+* User/movie/Genders Deep Model
+  * [1. Dataset preprocecing](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/1.input-data-building.ipynb)
+  * [2. Dataset preprocecing nd train, val, test split](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/2.train-test-sets-building.ipynb)  
+* [Model train an  validation (pandas Ray version)](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/3.train-model-pandas-ray.ipynb)
+* [Model train an  validation (Spark version)](https://github.com/adrianmarino/recommendation-system-approaches/blob/master/user-movie-genres-model/3.train-model-spark.ipynb)
+
+
