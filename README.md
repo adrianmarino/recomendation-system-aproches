@@ -46,7 +46,7 @@ Implementation, test and comparatives of different recommendation models (Collab
 
 * [anaconda](https://www.anaconda.com/products/individual) / [miniconda](https://docs.conda.io/en/latest/miniconda.html)
 
-## Getting starter
+## Getting started
 
 **Step 1**: Clone repo.
 
